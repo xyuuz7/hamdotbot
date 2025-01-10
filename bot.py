@@ -57,13 +57,15 @@ async def startfunc(client, msg):
     Awali semua command dibawah dengan garis miring (/)
     List command: 
 
-    1. /hamdot_copas_stiker | /hamdot_rilis_stiker | /hcs | /hrl -> ini kalau mau copas stiker dari sumber stiker luar (yang bukan digenerate sama bot)
-    2. /hamdot_hapus_stiker | /hhs -> ini kalau mau hapus stiker yang sudah ada di sticker pack
-    3. hamdot_instant_stiker/his/buatkan_gw_stiker/bgs -> ini kalau mau buat stiker dari gambar, caranya nanti ku ajarin
-    4. ingpokan_sumber -> ini fitur kayak google lens gitu, jadi bisa tahu sumber gambar dari mana
-    5. hamdot_convert_stiker | /hcs -> ini kalau mau masukin gambar stiker ke sticker pack, misalnya kayak hasil stiker iphone, samsung, dll (crop, crop an gambar)
-    7. ingpo_stiker -> ini detail data stiker, dalam bentuk JSON
-    8. jasa_duplikat_stiker | /jds -> ini kalau mau duplikat stiker pack yang dibuat dari oleh orang lain.
+    1. /hamdot_copas_stiker | /hamdot_rilis_stiker | /hcs | /hrl -> ini kalau mau copas stiker dari sumber stiker luar (yang bukan digenerate sama bot) | reply ke stiker nya yach
+    2. /hamdot_hapus_stiker | /hhs -> ini kalau mau hapus stiker yang sudah ada di sticker pack | reply ke stiker nya yach
+    3. /hamdot_instant_stiker | /his | /buatkan_gw_stiker | /bgs -> ini kalau mau buat stiker dari gambar, caranya nanti ku ajarin | reply ke gambar nya yach
+    4. /ingpokan_sumber -> ini fitur kayak google lens gitu, jadi bisa tahu sumber gambar dari mana | reply ke gambar nya yach
+    5. /hamdot_convert_stiker | /hcs -> ini kalau mau masukin gambar stiker ke sticker pack, misalnya kayak hasil stiker iphone, samsung, dll (crop, crop an gambar) | reply ke gambar nya yach
+    6. /ingpo_stiker | /is -> ini detail data stiker, dalam bentuk JSON | reply ke stiker nya yach
+    7. /jasa_duplikat_stiker | /jds -> ini kalau mau duplikat stiker pack yang dibuat dari oleh orang lain. | reply ke stiker nya yach
+
+    Tips: misal lu pengen custom emoji pas buat stiker, lu bisa ketik emoji setelah command, contoh: /hamdot_instant_stiker 🖕
     """
     await msg.reply_text(formatstr)
 
@@ -180,16 +182,10 @@ async def kangfunc(client, msg):
     # find current sticker set
     dbquery = collection.find_one({'user_id': msg.from_user.id});
     
-    print(dbquery)
-    
-    print(msg)
-    
     sanitized_input = fn.sanitize_emoji(msg)
     if sanitized_input["err"] == 1:
         await msg.reply_text(sanitized_input["msg"])
         return;
-
-    print(sanitized_input)
 
     if dbquery == None:
         fnret = await create_new_stickerpack(client, msg, sanitized_input, collection)
@@ -389,7 +385,7 @@ async def to_tsfunc(client, msg):
     )
     
     
-@app.on_message(filters.command(['ingpo_stiker']))
+@app.on_message(filters.command(['ingpo_stiker', 'is']))
 async def packinfofunc(client, msg):
     if await check_debug(msg) ==  -1:
         return
