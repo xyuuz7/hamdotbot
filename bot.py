@@ -50,6 +50,24 @@ async def check_debug(msg):
 async def startfunc(client, msg):
     await msg.reply_text("Hamdot here, ngapain lu panggil panggil gwejh? lagi sibuk banget nich")
 
+@app.on_message(filters.command(['inpo']))
+async def startfunc(client, msg):
+    await msg.reply_text("Yo ningen, nih gw kasih tahu cara buat gunain bot hamdot, disimak baik baik ye, gw geplak kalau sambil scroll short:")
+    formatstr = """ 
+    Awali semua command dibawah dengan garis miring (/)
+    List command: 
+
+    1. /hamdot_copas_stiker | /hamdot_rilis_stiker | /hcs | /hrl -> ini kalau mau copas stiker dari sumber stiker luar (yang bukan digenerate sama bot)
+    2. /hamdot_hapus_stiker | /hhs -> ini kalau mau hapus stiker yang sudah ada di sticker pack
+    3. hamdot_instant_stiker/his/buatkan_gw_stiker/bgs -> ini kalau mau buat stiker dari gambar, caranya nanti ku ajarin
+    4. ingpokan_sumber -> ini fitur kayak google lens gitu, jadi bisa tahu sumber gambar dari mana
+    5. hamdot_convert_stiker | /hcs -> ini kalau mau masukin gambar stiker ke sticker pack, misalnya kayak hasil stiker iphone, samsung, dll (crop, crop an gambar)
+    7. ingpo_stiker -> ini detail data stiker, dalam bentuk JSON
+    8. jasa_duplikat_stiker | /jds -> ini kalau mau duplikat stiker pack yang dibuat dari oleh orang lain.
+    """
+    await msg.reply_text(formatstr)
+
+
 @app.on_message(filters.command(['debug_json']))
 async def test(client, msg):
     if await check_debug(msg) ==  -1:
