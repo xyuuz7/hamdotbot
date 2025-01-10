@@ -1,0 +1,12 @@
+Awali semua command dibawah dengan garis miring (/)
+
+List command: 
+
+1. hamdot_copas_stiker/hamdot_rilis_stiker/hcs/hrl
+2. hamdot_hapus_stiker/hhs
+3. hamdot_instant_stiker/his/buatkan_gw_stiker/bgs
+4. ingpokan_sumber
+5. hamdot_convert_stiker/hcs
+6. hamdot_sauce/sauce
+7. ingpo_stiker
+8. jasa_duplikat_stiker/jds

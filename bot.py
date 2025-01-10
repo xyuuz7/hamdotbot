@@ -48,7 +48,7 @@ async def check_debug(msg):
         
 @app.on_message(filters.command(['start']))
 async def startfunc(client, msg):
-    await msg.reply_text("Hello!")
+    await msg.reply_text("Hamdot here, ngapain lu panggil panggil gwejh? lagi sibuk banget nich")
 
 @app.on_message(filters.command(['debug_json']))
 async def test(client, msg):
@@ -63,7 +63,7 @@ async def test(client, msg):
     await client.send_document(document=fulldirpath, chat_id=msg.chat.id)
 
     shutil.rmtree(dirpath)
-    
+
 @app.on_message(filters.command(['debug_file_id']))
 async def testfid(client, msg):
     if await check_debug(msg) ==  -1:
@@ -129,17 +129,17 @@ async def create_new_stickerpack(client, msg, sanitized_input, collection):
             emoji=sanitized_input["ret"]
         )
         
-        msgdata = await msg.reply_text(f"<a href='https://t.me/addstickers/{ret.short_name}'>Kanged!</a>")
+        msgdata = await msg.reply_text(f"<a href='https://t.me/addstickers/{ret.short_name}'>Hamdot Berhasil membuatkan luwh stiker, berikan 2k ke Hamdot skr!</a>")
         return [
             packshort, msgdata
         ]
     
     except pyroexception.bad_request_400.PeerIdInvalid as e:
-        await msg.reply_text("Peer id invalid or not known yet, Please PM first")
+        await msg.reply_text("Error cuyy, coba PM dev nya yach!")
         return -1
     
     except pyroexception.bad_request_400.StickerPngDimensions:
-        await msg.reply_text("sticker dimension is invalid. Please send valid image, not too small or too big")
+        await msg.reply_text("Gambar luwh ga sesuai size nya cuq, jangan kekecilan dan jangan kegedean yach, proporsional lahh, biar enak😋😋")
         return -1
     
     except Exception as e:
@@ -147,13 +147,13 @@ async def create_new_stickerpack(client, msg, sanitized_input, collection):
         await fn.send_trace(e, msg)
         return -1
         
-@app.on_message(filters.command(['kang']))
+@app.on_message(filters.command(['hamdot_copas_stiker', 'hcs', 'hamdot_rilis_stiker', 'hrl']))
 async def kangfunc(client, msg):
     if await check_debug(msg) ==  -1:
         return
-    
+
     if msg.reply_to_message == None or msg.reply_to_message.sticker == None:
-        await msg.reply_text("you must reply to another sticker, not a message")
+        await msg.reply_text("yang lu reply bukan stiker cuq, hamdeh, minim literasi lu")
         return;
     
     database = g_dbctx["kangutils"]
@@ -164,10 +164,14 @@ async def kangfunc(client, msg):
     
     print(dbquery)
     
+    print(msg)
+    
     sanitized_input = fn.sanitize_emoji(msg)
     if sanitized_input["err"] == 1:
         await msg.reply_text(sanitized_input["msg"])
         return;
+
+    print(sanitized_input)
 
     if dbquery == None:
         fnret = await create_new_stickerpack(client, msg, sanitized_input, collection)
@@ -194,7 +198,7 @@ async def kangfunc(client, msg):
             
             await fn.rename_sticker(packshort, client)
 
-            msgret = await msg.reply_text(f"<a href='https://t.me/addstickers/{ret.short_name}'>Kanged!</a>")
+            msgret = await msg.reply_text(f"<a href='https://t.me/addstickers/{ret.short_name}'>Hamdot berhasil copas, biaya copas 10k boz, jangan lupa bayar yach!</a>")
             
             return msgret
         except (pyroexception.bad_request_400.StickersTooMuch, 
@@ -213,7 +217,7 @@ async def kangfunc(client, msg):
                     }
                 )
         except pyroexception.bad_request_400.StickerPngDimensions:
-            await msg.reply_text("sticker dimension is invalid. Please send valid image, not too small or too big")
+            await msg.reply_text("Gambar luwh ga sesuai size nya cuq, jangan kekecilan dan jangan kegedean yach, proporsional lahh, biar enak😋😋")
             return -1
         except Exception as e:
             await fn.send_trace(e, msg)
@@ -228,19 +232,19 @@ async def kangfunc(client, msg):
 #         print(msgret)
 #         await msg.reply_text("test")
 
-@app.on_message(filters.command(['unkang']))
+@app.on_message(filters.command(['hamdot_hapus_stiker', 'hhs']))
 async def unkangfunc(client, msg):
     if await check_debug(msg) ==  -1:
         return
     
     if msg.reply_to_message == None:
-        await msg.reply_text("you must reply to another message")
+        await msg.reply_text("yang lu reply bukan stiker cuq, hamdeh, minim literasi lu")
         return;
     
     try:
         decoded = FileId.decode(fn.get_file_id(msg))
     except TypeError:
-        await msg.reply_text("Invalid reply, can't detect media")
+        await msg.reply_text("error cuy, pesan yang lu reply engga ke detect gambar sama gwejh, next time lu coba lagi yach")
     except Exception as e:
         await fn.send_trace(e, msg)
 
@@ -254,20 +258,20 @@ async def unkangfunc(client, msg):
             )
         ))
         
-        await msg.reply_text("sticker unkanged!")
+        await msg.reply_text("njir, udah dibuatin stiker malah dihapus, ga ngehargain banget lu")
     except pyroexception.bad_request_400.StickersetInvalid:
-        await msg.reply_text("This sticker is not yours, can't unkang. make sure you do /fork then /unkang")
+        await msg.reply_text("banh, lu ga bisa ngehapus stiker yang bukan punya lu, itu namanya nyolong, zzz")
     
-@app.on_message(filters.command(['fork']))
+@app.on_message(filters.command(['jasa_duplikat_stiker', 'jds']))
 async def forkfunc(client, msg):
     if await check_debug(msg) ==  -1:
         return
     
     if msg.reply_to_message == None or msg.reply_to_message.sticker == None:
-        await msg.reply_text("you must reply to another sticker")
+        await msg.reply_text("yang lu reply bukan stiker cuq, hamdeh, minim literasi lu")
         return;
     
-    await msg.reply_text("Processing... It's takes a littebit of time.")
+    await msg.reply_text("Hamdot sedang memproses, lagian lu ga kreatif banget duplikat stiker orang, jangan lupa bayar biaya duplikat 50k sama dev nya yach!")
     await client.send_chat_action(
         chat_id=msg.chat.id,
         action=pyroenum.ChatAction.TYPING
@@ -303,16 +307,16 @@ async def forkfunc(client, msg):
             except:
                 print(f"err forking: {s.file_id} {packshort}")
     # print(stickerset)
-    await msg.reply_text(f"sticker <a href='https://t.me/addstickers/{packshort}'>forked!</a>")
+    await msg.reply_text(f"sticker <a href='https://t.me/addstickers/{packshort}'>Berterima kasihlah sama Hamdot, stiker yang lu request udah gw duplikat ya, jangan lupa dibayar cuq</a>")
 
 
-@app.on_message(filters.command(['to_ts', 'ts', 'tosticker', 'to_sticker']))
+@app.on_message(filters.command(['hamdot_convert_stiker', 'hcs']))
 async def to_tsfunc(client, msg):
     if await check_debug(msg) ==  -1:
         return
     
     if msg.reply_to_message == None or msg.reply_to_message.photo == None:
-        await msg.reply_text("you must reply to photo")
+        await msg.reply_text("yang lu reply bukan gambar cuq, hamdeh, minim literasi lu")
         return;
     
     bytesio_ret = await client.download_media(
@@ -367,13 +371,13 @@ async def to_tsfunc(client, msg):
     )
     
     
-@app.on_message(filters.command(['packinfo', 'info', 'stickerpack']))
+@app.on_message(filters.command(['ingpo_stiker']))
 async def packinfofunc(client, msg):
     if await check_debug(msg) ==  -1:
         return
     
     if msg.reply_to_message == None or msg.reply_to_message.sticker == None:
-        await msg.reply_text("you must reply to sticker")
+        await msg.reply_text("Yang lu reply bukan stiker cuq, hamdeh, minim literasi lu")
         return;
     
     data = await client.get_sticker_set(
@@ -396,7 +400,7 @@ async def msgdel(client, msg):
         chat_id=msg.chat.id,
         message_ids=msg.reply_to_message.id
     )
-    
+
     
 @app.on_message(filters.command(['toimg', 'img', 'timg', 'tm']))
 async def toimgfunc(client, msg):
@@ -449,7 +453,7 @@ async def toimgfunc(client, msg):
         os.remove(animationpath + ".gif")
         # print("end")
         
-@app.on_message(filters.command(['sauce', 'source', 'reverse']))
+@app.on_message(filters.command(['ingpokan_sumber']))
 async def reverseimg(client, msg):
     if await check_debug(msg) ==  -1:
         return
@@ -468,7 +472,83 @@ async def reverseimg(client, msg):
             os.remove(byteres)
 
     else:
-        await msg.reply_text("you must reply to a sticker / image")
+        await msg.reply_text("lu harus reply ke gambar atau stiker ya, untung lagi bagus mood gwejh")
         return;
+
+@app.on_message(filters.command(['hamdot_instant_stiker', 'his', 'buatkan_gw_stiker', 'bgs']))
+async def instantMakeSticker(client, old_msg):
+    if await check_debug(old_msg) ==  -1:
+        return
+    
+    msg = await to_tsfunc(client, old_msg)
+    
+    database = g_dbctx["kangutils"]
+    collection = database["stickerpack_state"]
+    
+    # find current sticker set
+    dbquery = collection.find_one({'user_id': old_msg.from_user.id});
+    
+    sanitized_input = fn.sanitize_emoji(old_msg)
+    if sanitized_input["err"] == 1:
+        await msg.reply_text(sanitized_input["msg"])
+        return;
+
+    if dbquery == None:
+        fnret = await create_new_stickerpack(client, old_msg, sanitized_input, collection)
+        if fnret != -1:
+            collection.insert_one(
+                {
+                    'user_id': old_msg.from_user.id,
+                    'current': fnret[0]
+                }
+            )
+            
+            return fnret[1]
+    else:
+        packshort = dbquery["current"]
+        
+        try:
+            print(msg)
+            print(fn.get_sticker_id(msg))
+            ret = await client.add_sticker_to_set(
+                set_short_name=packshort,
+                sticker=fn.get_sticker_id(msg),
+                user_id=old_msg.from_user.id,
+                emoji=sanitized_input["ret"]
+            )
+            
+            await fn.rename_sticker(packshort, client)
+
+            msgret = await msg.reply_text(f"<a href='https://t.me/addstickers/{ret.short_name}'>bukti hamdot itu kerja keras YGY</a>")
+            
+            return msgret
+        except (pyroexception.bad_request_400.StickersTooMuch, 
+                pyroexception.bad_request_400.StickersetInvalid):
+            fnret = await create_new_stickerpack(client, old_msg, sanitized_input, collection)
+            
+            if fnret != -1:
+                collection.update_one(
+                    {
+                        'user_id': old_msg.from_user.id
+                    }, 
+                    {
+                        '$set': {
+                            'current': fnret[0]
+                        }
+                    }
+                )
+        except pyroexception.bad_request_400.StickerPngDimensions:
+            await msg.reply_text("Gambar luwh ga sesuai size nya cuq, jangan kekecilan dan jangan kegedean yach, proporsional lahh, biar enak😋😋")
+            return -1
+        except Exception as e:
+            await fn.send_trace(e, msg)
+
+    # delete sticker telegram message from msg
+    await client.delete_messages(
+        chat_id=msg.chat.id,
+        message_ids=msg.reply_to_message.id
+    )
+
+    
     
 app.run()

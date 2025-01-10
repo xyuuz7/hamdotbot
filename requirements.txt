@@ -23,7 +23,7 @@ lottie==0.7.0
 motor==3.6.0
 moviepy==1.0.3
 multidict==6.1.0
-numpy==2.1.1
+numpy==2.0.2
 pillow==10.4.0
 proglog==0.1.10
 pyaes==1.6.1
@@ -43,3 +43,4 @@ typing_extensions==4.12.2
 urllib3==2.2.3
 webencodings==0.5.1
 yarl==1.13.1
+imgbbpy

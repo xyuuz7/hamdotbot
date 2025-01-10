@@ -12,7 +12,7 @@ from pyrogram.raw.types import InputStickerSetShortName
 
 load_dotenv()
 
-def genrand_stickerpack_name(msg):
+def genrand_stickerpack_name(msg, sticker_name=""):
         cur_time = int(time());
         
         if msg.sender_chat != None:
@@ -44,10 +44,11 @@ def get_file_id(msg):
                 return msg.reply_to_message.sticker.file_id
         if msg.reply_to_message.document != None and msg.reply_to_message.document.mime_type == "video/webm":
                 return msg.reply_to_message.document.file_id
+
+def get_sticker_id(msg):
+    return msg.sticker.file_id
         
 def sanitize_emoji(msg):
-    
-
     try:
         cur = msg.command[1]
         
